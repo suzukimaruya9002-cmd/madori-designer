@@ -71,7 +71,15 @@ import {initializeApp} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase
 import {getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
 import {getFirestore,doc,getDoc,setDoc,onSnapshot} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
 // Firebase コンソールで発行したウェブアプリ設定をここに貼り付ける（APIキーは公開識別子です）
-const firebaseConfig = null;
+const firebaseConfig = {
+ apiKey:"AIzaSyC9i_JinN7uLa5v_mnWmNs7LoxZ6Iz-Dks",
+ authDomain:"madori-designer.firebaseapp.com",
+ projectId:"madori-designer",
+ storageBucket:"madori-designer.firebasestorage.app",
+ messagingSenderId:"1066044468156",
+ appId:"1:1066044468156:web:2f5a12261967ae88ae19b9",
+ measurementId:"G-CQN12F6C8D"
+};
 const $=id=>document.getElementById(id),state=t=>$('cloudState').textContent=t;
 let db=null,auth=null,user=null,room=null,unsub=null,saveTimer=null,revision='',applying=false;
 function enabled(){return !!firebaseConfig&&!!firebaseConfig.apiKey&&!!firebaseConfig.projectId}
