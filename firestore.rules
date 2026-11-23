@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // A 192-bit random share code is the document ID. Access requires Google sign-in.
+    // Anyone who learns the code and signs in can read/write the plan.
+    match /sharedPlans/{shareCode} {
+      allow get, create, update: if request.auth != null
+        && shareCode.matches('^[a-f0-9]{48}$')
+        && (request.method == 'get' || (
+          request.resource.data.keys().hasOnly(['data','revision','updatedAt'])
+          && request.resource.data.revision is string
+          && request.resource.data.updatedAt is number
+          && request.resource.data.data is map
+        ));
+      allow list, delete: if false;
+    }
+  }
+}
